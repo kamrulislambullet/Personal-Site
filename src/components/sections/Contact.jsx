@@ -46,7 +46,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-28 px-[5%] bg-bg">
+    <section id="contact" className="py-14 md:py-28 px-[5%] bg-bg">
       <SectionHeader
         tag="Get In Touch"
         title="Let's Work Together"

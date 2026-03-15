@@ -5,7 +5,7 @@ import kamrul from "../../assets/kamrul.jpg"
 const Hero = () => (
   <section
     id="hero"
-    className="min-h-screen flex items-center px-[5%] pt-28 pb-20 relative overflow-hidden bg-bg"
+    className="md:min-h-screen flex items-center px-[5%] pt-28 pb-20 relative overflow-hidden bg-bg"
   >
     {/* Background glows */}
     <div

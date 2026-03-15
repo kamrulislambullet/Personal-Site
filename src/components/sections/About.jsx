@@ -17,8 +17,8 @@ const INFO_ITEMS = [
 ];
 
 const About = () => (
-  <section id="about" className="py-28 px-[5%] bg-bg-2">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center max-w-275 mx-auto">
+  <section id="about" className="py-14 md:py-28 px-[5%] bg-bg-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
       {/* ── Image ── */}
       <div className="reveal-l relative">
         <div
@@ -71,17 +71,17 @@ const About = () => (
         </p>
 
         {/* Info grid */}
-        <div className="grid grid-cols-2 gap-3 mb-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-7">
           {INFO_ITEMS.map(({ label, value, color }) => (
             <div
               key={label}
               className="p-4 bg-white/3 border border-white/[.07] rounded-sm"
             >
-              <div className="text-muted text-[.7rem] uppercase tracking-widest mb-1 font-dm">
+              <div className="text-muted text-[14px] uppercase tracking-widest mb-1 font-dm">
                 {label}
               </div>
               <div
-                className={`text-sm font-medium font-dm ${color || "text-[#e8edf5]"}`}
+                className={`text-lg font-medium font-dm ${color || "text-[#e8edf5]"}`}
               >
                 {value}
               </div>

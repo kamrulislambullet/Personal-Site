@@ -44,7 +44,7 @@ const SkillCard = ({ name, pct, Icon, color }) => {
 };
 
 const Skills = () => (
-  <section id="skills" className="py-28 px-[5%] bg-bg">
+  <section id="skills" className="py-14 md:py-28 px-[5%] bg-bg">
     <SectionHeader
       tag="My Expertise"
       title="Technical Skills"
