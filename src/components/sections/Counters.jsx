@@ -39,7 +39,7 @@ const Counters = () => {
   return (
     <div
       ref={ref}
-      className="relative py-14 md:py-28 px-[5%] overflow-hidden"
+      className="relative py-28 px-[5%] overflow-hidden"
       style={{ background: "linear-gradient(135deg,#00e5ff,#7c3aed)" }}
     >
       <div className="absolute inset-0 bg-bg/70" />

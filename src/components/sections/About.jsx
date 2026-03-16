@@ -17,7 +17,7 @@ const INFO_ITEMS = [
 ];
 
 const About = () => (
-  <section id="about" className="py-14 md:py-28 px-[5%] bg-bg-2">
+  <section id="about" className="py-28 px-[5%] bg-bg-2">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
       {/* ── Image ── */}
       <div className="reveal-l relative">

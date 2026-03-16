@@ -4,7 +4,7 @@ import Timeline from "../ui/Timeline";
 import { expData, eduData } from "../../data/experience";
 
 const Experience = () => (
-  <section id="experience" className="py-14 md:py-28 px-[5%] bg-bg-2">
+  <section id="experience" className="py-28 px-[5%] bg-bg-2">
     <SectionHeader tag="My Journey" title="Experience & Education" center />
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-275 mx-auto">

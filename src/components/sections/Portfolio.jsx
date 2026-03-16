@@ -64,7 +64,7 @@ const Portfolio = () => {
   const visible = active === "All" ? projects : projects.filter((p) => p.cat === active);
 
   return (
-    <section id="portfolio" className="py-14 md:py-28 px-[5%] bg-bg overflow-hidden">
+    <section id="portfolio" className="py-28 px-[5%] bg-bg overflow-hidden">
       <div className="max-w-350 mx-auto">
         <SectionHeader
           tag="Selected Works"
@@ -77,7 +77,7 @@ const Portfolio = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 w-full">
           {visible.map((project, i) => (
             <ProjectCard
-              key={project.title}
+              key={i}
               {...project}
             />
           ))}

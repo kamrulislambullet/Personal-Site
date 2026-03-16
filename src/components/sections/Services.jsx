@@ -23,7 +23,7 @@ const ServiceCard = ({ Icon, title, desc, price, color }) => {
 };
 
 const Services = () => (
-  <section id="services" className="py-14 md:py-28 px-[5%] bg-bg-2">
+  <section id="services" className="py-28 px-[5%] bg-bg-2">
     <SectionHeader
       tag="What I Offer"
       title="My Services"

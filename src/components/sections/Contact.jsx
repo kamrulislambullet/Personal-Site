@@ -1,4 +1,6 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import toast, { Toaster } from "react-hot-toast";
 import {
   Mail,
   Phone,
@@ -10,14 +12,19 @@ import {
   Dribbble,
   Youtube,
   Send,
-  CheckCircle2,
 } from "lucide-react";
 import SectionHeader from "../ui/SectionHeader";
 import Btn from "../ui/Btn";
 
+// ── EmailJS Keys ──────────────────────────────────────────
+const EJS_SERVICE_ID = "service_8c40qis";
+const EJS_TEMPLATE_ID = "template_wpczh5k";
+const EJS_PUBLIC_KEY = "Y0qEzoeIqq_rAdVjX";
+// ─────────────────────────────────────────────────────────
+
 const CONTACT_INFO = [
-  { Icon: Mail, label: "Email", value: "yourname@email.com" },
-  { Icon: Phone, label: "Phone", value: "+880 1XXX-XXXXXX" },
+  { Icon: Mail, label: "Email", value: "kamrulislambullet@gmail.com" },
+  { Icon: Phone, label: "Phone", value: "+8801774377254" },
   { Icon: MapPin, label: "Location", value: "Dhaka, Bangladesh" },
   { Icon: Clock, label: "Working Hours", value: "Sun-Thu: 9AM - 8PM BST" },
 ];
@@ -33,20 +40,83 @@ const SOCIALS = [
 const inputCls =
   "w-full bg-white/[.03] border border-white/[.08] rounded-[3px] text-[#e8edf5] font-dm text-[.93rem] px-4 py-3 focus:border-cyan outline-none transition-colors duration-300";
 
+const INIT_FORM = {
+  from_name: "",
+  from_email: "",
+  phone: "",
+  budget: "",
+  subject: "",
+  message: "",
+};
+
 const Contact = () => {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState(INIT_FORM);
+
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSend = () => {
+    // ── Validation ──
+    if (
+      !form.from_name.trim() ||
+      !form.from_email.trim() ||
+      !form.message.trim()
+    ) {
+      toast.error("Name, Email and Message are required.", {
+        style: {
+          background: "#0f172a",
+          color: "#e8edf5",
+          border: "1px solid rgba(255,80,80,.35)",
+          fontFamily: "DM Sans, sans-serif",
+          fontSize: "0.88rem",
+        },
+        iconTheme: { primary: "#ff5050", secondary: "#0f172a" },
+      });
+      return;
+    }
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSent(true);
-    }, 1600);
+
+    emailjs
+      .send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, form, EJS_PUBLIC_KEY)
+      .then(() => {
+        setLoading(false);
+        setSent(true);
+        setForm(INIT_FORM);
+        toast.success("Message sent! I'll reply within 24 hours.", {
+          duration: 5000,
+          style: {
+            background: "#0d1f1a",
+            color: "#4ade80",
+            border: "1px solid rgba(74,222,128,.25)",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "0.88rem",
+          },
+          iconTheme: { primary: "#4ade80", secondary: "#0d1f1a" },
+        });
+      })
+      .catch(() => {
+        setLoading(false);
+        toast.error("Something went wrong. Please try again.", {
+          style: {
+            background: "#0f172a",
+            color: "#e8edf5",
+            border: "1px solid rgba(255,80,80,.35)",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "0.88rem",
+          },
+          iconTheme: { primary: "#ff5050", secondary: "#0f172a" },
+        });
+      });
   };
 
   return (
-    <section id="contact" className="py-14 md:py-28 px-[5%] bg-bg">
+    <section id="contact" className="py-28 px-[5%] bg-bg">
+      {/* Toast container */}
+      <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
+
       <SectionHeader
         tag="Get In Touch"
         title="Let's Work Together"
@@ -110,16 +180,26 @@ const Contact = () => {
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-muted text-[.72rem] uppercase tracking-widest mb-1.5 font-dm">
-                Your Name
+                Your Name <span className="text-red-400">*</span>
               </label>
-              <input type="text" placeholder="John Doe" className={inputCls} />
+              <input
+                type="text"
+                name="from_name"
+                value={form.from_name}
+                onChange={handleChange}
+                placeholder="John Doe"
+                className={inputCls}
+              />
             </div>
             <div>
               <label className="block text-muted text-[.72rem] uppercase tracking-widest mb-1.5 font-dm">
-                Email
+                Email <span className="text-red-400">*</span>
               </label>
               <input
                 type="email"
+                name="from_email"
+                value={form.from_email}
+                onChange={handleChange}
                 placeholder="john@email.com"
                 className={inputCls}
               />
@@ -133,6 +213,9 @@ const Contact = () => {
               </label>
               <input
                 type="tel"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
                 placeholder="+880 1XXX-XXXXXX"
                 className={inputCls}
               />
@@ -141,12 +224,33 @@ const Contact = () => {
               <label className="block text-muted text-[.72rem] uppercase tracking-widest mb-1.5 font-dm">
                 Budget
               </label>
-              <select className={`${inputCls} appearance-none`}>
-                <option>Select budget</option>
-                <option>$500 – $1,000</option>
-                <option>$1,000 – $3,000</option>
-                <option>$3,000 – $10,000</option>
-                <option>$10,000+</option>
+              <select
+                name="budget"
+                value={form.budget}
+                onChange={handleChange}
+                className={`${inputCls} appearance-none cursor-pointer`}
+              >
+                <option value="" className="text-black">
+                  Select budget
+                </option>
+                <option value="$50 - $100" className="text-black">
+                  $50 - $100
+                </option>
+                <option value="$100 - $500" className="text-black">
+                  $100 - $500
+                </option>
+                <option value="$500 - $1,000" className="text-black">
+                  $500 - $1,000
+                </option>
+                <option value="$1,000 - $3,000" className="text-black">
+                  $1,000 - $3,000
+                </option>
+                <option value="$3,000 - $10,000" className="text-black">
+                  $3,000 - $10,000
+                </option>
+                <option value="$10,000+" className="text-black">
+                  $10,000+
+                </option>
               </select>
             </div>
           </div>
@@ -157,6 +261,9 @@ const Contact = () => {
             </label>
             <input
               type="text"
+              name="subject"
+              value={form.subject}
+              onChange={handleChange}
               placeholder="Project inquiry, collaboration..."
               className={inputCls}
             />
@@ -164,23 +271,35 @@ const Contact = () => {
 
           <div className="mb-5">
             <label className="block text-muted text-[.72rem] uppercase tracking-widest mb-1.5 font-dm">
-              Message
+              Message <span className="text-red-400">*</span>
             </label>
             <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
               placeholder="Tell me about your project, timeline, and goals..."
               className={`${inputCls} min-h-32.5 resize-y`}
             />
           </div>
 
-          {!sent ? (
-            <Btn primary onClick={handleSend} full icon={Send}>
-              {loading ? "Sending..." : "Send Message"}
-            </Btn>
-          ) : (
-            <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-sm text-green-400 text-[.88rem] text-center flex items-center justify-center gap-2 font-dm">
-              <CheckCircle2 size={16} />
-              Message sent! I'll reply within 24 hours.
-            </div>
+          <Btn
+            primary
+            onClick={handleSend}
+            full
+            icon={Send}
+            disabled={loading || sent}
+          >
+            {loading ? "Sending..." : sent ? "Message Sent ✓" : "Send Message"}
+          </Btn>
+
+          {/* Send another message */}
+          {sent && (
+            <button
+              onClick={() => setSent(false)}
+              className="mt-3 w-full text-center text-muted text-[.78rem] font-dm hover:text-cyan transition-colors duration-300 underline underline-offset-2"
+            >
+              Send another message
+            </button>
           )}
         </div>
       </div>
