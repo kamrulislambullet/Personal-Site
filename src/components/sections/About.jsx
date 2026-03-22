@@ -2,7 +2,7 @@ import { Monitor, Download } from "lucide-react";
 import LineAccent from "../ui/LineAccent";
 import Tag from "../ui/Tag";
 import Btn from "../ui/Btn";
-import kamrul2 from "../../assets/kamrul-2.jpg";
+import kamrul2 from "../../assets/profile.png";
 import resumePDF from "../../assets/Kamrul_Hasan_Resume.docx.pdf";
 
 const INFO_ITEMS = [
