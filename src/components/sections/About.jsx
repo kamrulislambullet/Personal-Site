@@ -3,7 +3,7 @@ import LineAccent from "../ui/LineAccent";
 import Tag from "../ui/Tag";
 import Btn from "../ui/Btn";
 import kamrul2 from "../../assets/profile.png";
-import resumePDF from "../../assets/Kamrul_Hasan_Resume.docx.pdf";
+import resumePDF from "../../assets/Kamrul_Hasan_Resume.pdf";
 
 const INFO_ITEMS = [
   { label: "Name", value: "Kamrul Hasan", color: null },
@@ -19,7 +19,7 @@ const INFO_ITEMS = [
 const handleDownload = () => {
   const link = document.createElement("a");
   link.href = resumePDF;
-  link.download = "Kamrul-Hasan-Resume.pdf"; 
+  link.download = "Kamrul_Hasan_Resume.pdf"; 
   link.click();
 };
 
