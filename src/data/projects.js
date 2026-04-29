@@ -1,4 +1,4 @@
-import { Globe, Award, Camera } from "lucide-react";
+import { Globe, Award, Camera, BarChart3 } from "lucide-react";
 
 const projects = [
   {
@@ -49,6 +49,26 @@ const projects = [
     grad: "linear-gradient(135deg,#6366f1,#ec4899)",
     link: "https://instagram-clone-dusky-eight.vercel.app/",
     codeGithub: "https://github.com/kamrulhasanbullet/insta-clone",
+  },
+  {
+    Icon: BarChart3,
+    tag: "Full-Stack",
+    title: "Assignment & Learning Analytics Platform",
+    desc: "A full-stack platform connecting instructors and students where assignments can be created, submitted, reviewed with AI-assisted feedback, and analyzed through interactive performance dashboards.",
+    tech: [
+      "Next.js 15",
+      "TypeScript",
+      "MongoDB",
+      "Mongoose",
+      "NextAuth",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Recharts",
+      "Claude AI",
+    ],
+    grad: "linear-gradient(135deg,#22c55e,#3b82f6)",
+    link: "https://assignment-tracker-zeta.vercel.app/", 
+    codeGithub: "https://github.com/kamrulhasanbullet/assignment-tracker", 
   },
 ];
 
